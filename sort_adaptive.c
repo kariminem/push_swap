@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 12:17:09 by ktaher            #+#    #+#             */
-/*   Updated: 2026/06/02 22:44:08 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/03 16:01:48 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void	ft_sort_adaptive(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
-	int		disorder;
-	int		len_list;
+	double		disorder;
+	int			len_list;
 
-	disorder = ft_compute_disorder(stack_a);
+	disorder = calc_disorder(stack_a);
 	len_list = ft_lstsize(stack_a->head);
 	if (len_list == 2)
 		ft_two_sort(stack_a, bench);
 	else if (len_list == 3)
 		ft_three_sort(stack_a, bench);
-	else if (disorder < 2000)
+	else if (disorder < 0.2)
 	{
 		selection_sorting(stack_a, stack_b, bench);
 		bench->strat = "simple";
 	}
-	else if (disorder > 5000)
+	else if (disorder >= 0.5)
 	{
-		merge_sort(stack_a, stack_b, bench);
+		ft_radix_sort(stack_a, stack_b, bench);
 		bench->strat = "complex";
 	}
 	else
@@ -38,34 +38,6 @@ void	ft_sort_adaptive(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 		bucket_sorting(stack_a, stack_b, bench);
 		bench->strat = "medium";
 	}
-}
-
-int	ft_compute_disorder(t_stack *stack_a)
-{
-	int		mistakes;
-	int		total_pairs;
-	t_list	*ptr1;
-	t_list	*ptr2;
-
-	mistakes = 0;
-	total_pairs = 0;
-	ptr1 = stack_a->head;
-	ptr2 = stack_a->head;
-	if (ft_lstsize(ptr1) < 2)
-		return (0);
-	while (ptr1 != NULL)
-	{
-		ptr2 = ptr1->next;
-		while (ptr2 != NULL)
-		{
-			total_pairs ++;
-			if (*(int *)ptr1->content > *(int *)ptr2->content)
-				mistakes ++;
-			ptr2 = ptr2->next;
-		}
-		ptr1 = ptr1->next;
-	}
-	return (10000 * mistakes / total_pairs);
 }
 
 void	ft_two_sort(t_stack *stack_a, t_bench *bench)

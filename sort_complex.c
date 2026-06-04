@@ -5,104 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbliard <gbliard@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/02 12:44:46 by gbliard           #+#    #+#             */
-/*   Updated: 2026/06/02 12:48:37 by gbliard          ###   ########.fr       */
+/*   Created: 2026/06/03 15:02:00 by gbliard           #+#    #+#             */
+/*   Updated: 2026/06/03 15:05:50 by gbliard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push_n_stack(t_stack *s_a, t_stack *s_b, int n, t_bench *bench)
+int	ft_find_max_binary(t_list *head)
 {
-	while (n > 0)
+	int	i;
+	int	value;
+	int	max;
+
+	max = 0;
+	while (head != NULL)
 	{
-		pb(s_a, s_b, bench);
-		rb(s_b, bench);
-		n--;
+		i = 0;
+		value = *(int *)head->content;
+		while (value > 0)
+		{
+			value = value >> 1;
+			i++;
+		}
+		max = ft_max(i, max);
+		head = head ->next;
 	}
-	return ;
+	return (max);
 }
 
-void	ft_merge_stack(t_stack *s_a, t_stack *s_b, int n_a, t_bench *bench)
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
 {
-	int	content_a;
-	int	content_b;
+	int	pos;
+	int	n;
+	int	current_byte;
 
-	while (s_b->head)
-	{
-		content_a = *(int *)s_a->head->content;
-		content_b = *(int *)s_b->head->content;
-		if (n_a == 0 || content_b < content_a)
-		{
-			pa(s_a, s_b, bench);
-			ra(s_a, bench);
-		}
-		else
-		{
-			ra(s_a, bench);
-			n_a--;
-		}
-	}
-	while (n_a-- > 0)
-		ra(s_a, bench);
-}
-
-void	merge_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench)
-{
-	int		l;
-	int		pos;
-	int		n;
-
-	l = 1;
 	pos = 0;
+	current_byte = 0;
 	n = ft_lstsize(stack_a->head);
-	while (l < n)
+	while (!is_sorted(stack_a->head))
 	{
-		while (pos < n - l)
+		if (!ft_skip_pass(stack_a, current_byte))
 		{
-			ft_push_n_stack(stack_a, stack_b, l, bench);
-			ft_merge_stack(stack_a, stack_b, ft_min(l, n - pos - l), bench);
-			pos += l + ft_min(l, n - pos - l);
+			while (pos < n)
+			{
+				if (((*(int *)stack_a->head->content >> current_byte) & 1) == 1)
+					ra(stack_a, bench);
+				else
+					pb(stack_a, stack_b, bench);
+				pos++;
+			}
+			while (stack_b->head != NULL)
+				pa(stack_a, stack_b, bench);
 		}
-		while (pos++ < n)
-			ra(stack_a, bench);
-		l = 2 * l;
 		pos = 0;
+		current_byte++;
 	}
 }
 
-int	ft_lst_is_rot_sorted(t_stack *s_a)
+int	ft_skip_pass(t_stack *stack_a, int current_byte)
 {
-	int		i;
-	int		stop;
-	t_list	*head;
-	int		i_out;
+	t_list	*ptr;
+	int		byte_1;
 
-	stop = 0;
-	head = s_a->head;
-	i = 0;
-	if (!head)
-		return (0);
-	while (head->next)
+	ptr = stack_a->head;
+	byte_1 = ((*(int *)ptr ->content >> current_byte) & 1);
+	while (ptr != NULL)
 	{
-		if (*(int *)head->content > *(int *)head->next->content)
-		{
-			stop++;
-			i_out = i;
-		}
-		head = head->next;
-		i++;
+		if (((*(int *)ptr ->content >> current_byte) & 1) != byte_1)
+			return (0);
+		ptr = ptr->next;
 	}
-	if (stop == 0)
-		return (0);
-	if (stop == 1 && (*(int *)s_a->tail->content < *(int *)s_a->head->content))
-		return (i_out + 1);
-	return (-1);
+	return (1);
 }
 
-int	ft_min(int a, int b)
+int	ft_max(int a, int b)
 {
 	if (a > b)
-		return (b);
-	return (a);
+		return (a);
+	return (b);
 }

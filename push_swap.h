@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gbliard <gbliard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 16:26:44 by username          #+#    #+#             */
-/*   Updated: 2026/06/02 22:33:40 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/03 15:20:46 by gbliard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_bench
 	double	disorder;
 	char	*strat;
 }	t_bench;
+
 /**
 * Swap the first two elements at the top of stack a
 */
@@ -99,15 +100,10 @@ void	ft_new_node(t_stack *list, int *ptr);
 int		catch_duplicate(t_stack *list, int value);
 int		is_valid_int(char *str);
 
-void	pair_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
-void	merge_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
-int		ft_lst_is_sorted(t_list *head);
-int		ft_lst_is_rot_sorted(t_stack *stack_a);
 int		find_min(t_list *lst);
 void	bucket_sorting(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 void	bench_print(char *strat, t_bench *bench);
 int		is_sorted(t_list *lst);
-int		ft_min(int a, int b);
 double	calc_disorder(t_stack *stack_a);
 int		ft_compute_disorder(t_stack *stack_a);
 int		find_max_pos(t_list *lst, int max_num);
@@ -115,4 +111,8 @@ void	ft_sort_adaptive(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
 void	ft_three_sort(t_stack *stack_a, t_bench *bench);
 void	ft_two_sort(t_stack *stack_a, t_bench *bench);
 int		ft_max_pos_1(t_stack *stack_a);
+int		ft_skip_pass(t_stack *stack_a, int current_byte);
+void	ft_radix_sort(t_stack *stack_a, t_stack *stack_b, t_bench *bench);
+int		ft_find_max_binary(t_list *head);
+int		ft_max(int a, int b);
 #endif

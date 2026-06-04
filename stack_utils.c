@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gbliard <gbliard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:17:27 by username          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/06/04 20:51:05 by ktaher           ###   ########.fr       */
+=======
+/*   Updated: 2026/06/03 15:13:49 by gbliard          ###   ########.fr       */
+>>>>>>> 6c927aecd4099066a7d3c12d850c34a103d392a4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +69,7 @@ void	run_strategy(char *strategy, t_bench *bench,
 	else if (ft_strncmp(strategy, "medium", 6) == 0)
 		bucket_sorting(stack_a, stack_b, bench);
 	else if (ft_strncmp(strategy, "complex", 7) == 0)
-		merge_sort(stack_a, stack_b, bench);
+		ft_radix_sort(stack_a, stack_b, bench);
 	else
 		ft_sort_adaptive(stack_a, stack_b, bench);
 	if (bench->bench_active)

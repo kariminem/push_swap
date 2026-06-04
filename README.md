@@ -103,9 +103,9 @@ Divides the value range `[min, max]` into √n equal chunks. Iterates through ch
 
 ### Strategy 3 — Complex O(n log n) — `--complex`
 
-**Algorithm:** Merge sort adaptation using two stacks.
+**Algorithm:** Initially, we developped a merge sort and then optimised it using existing runs in a timsort fashion. When this still did not pass the GOOD bar, I tried implementing a quicksort which had some of the same issues. In the end, RADIX was both simple to code and more efficient for highly disordered lists. This is the algorithm we settled on:
 
-Sorts pairs in place with `sa`, then repeatedly merges sorted runs of increasing size using push/rotate operations between stacks a and b. Each merge pass doubles the sorted run length, requiring O(log n) passes of O(n) work each.
+Starting at the first byte (index 0), the numbers are compared, those with a byte == 1 are kept in A by using ra, the others are pushed to B using pb. Then the stack of pb is pushed back onto stack A using pa. By using this iteratively, the smaller elements are placed on top and the larger on the bottom. Each pass does 3/2 * n operations with log2(n) passes.
 
 **Threshold:** Used by adaptive mode when disorder ≥ 0.5.
 

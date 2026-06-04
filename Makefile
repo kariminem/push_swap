@@ -31,6 +31,7 @@ $(NAME): $(OBJS) $(LIBFT) $(MANDATORY)
 
 clean:
 	rm -f $(OBJS)
+	rm -f checker
 	rm -f $(MANDATORY_OBJ)
 	$(MAKE) -C $(LIBFT_DIR) clean
 
@@ -38,8 +39,8 @@ fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
-bonus: $(OBJS)
-	cc -Wall -Wextra -Werror $(OBJS) checker.c -L./libft -lft -o checker
+bonus: $(OBJS) $(LIBFT)
+	cc -Wall -Wextra -Werror $(OBJS) checker_bonus.c -L./libft -lft -o checker
 
 
 re: fclean all
