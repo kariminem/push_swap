@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:17:27 by username          #+#    #+#             */
-/*   Updated: 2026/06/02 23:23:03 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/04 20:51:05 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_stack	*init_stack(void)
 	t_stack	*stack;
 
 	stack = malloc(sizeof(t_stack));
+	if (!stack)
+		return (NULL);
 	stack->head = NULL;
 	stack->tail = NULL;
 	return (stack);
