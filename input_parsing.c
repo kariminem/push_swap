@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:18:10 by ktaher            #+#    #+#             */
-/*   Updated: 2026/06/06 09:00:20 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/06 09:16:04 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ char	*strategy_parser(char **argv, t_bench *bench, int argc)
 	{
 		if (ft_strncmp(argv[i], "--simple", 8) == 0)
 			strat = argv[i] + 2;
+		else if (ft_strncmp(argv[i], "--show-ops=0", 12) == 0)
+			bench -> show_ops = 0;
 		else if (ft_strncmp(argv[i], "--medium", 8) == 0)
 			strat = argv[i] + 2;
 		else if (ft_strncmp(argv[i], "--complex", 9) == 0)
