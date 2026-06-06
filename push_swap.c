@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:17:53 by username          #+#    #+#             */
-/*   Updated: 2026/06/04 20:50:50 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/06 09:00:33 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int	main(int argc, char **argv)
 	run_strategy(strategy, bench_stack, stack_a, stack_b);
 	cleanup(stack_a, stack_b);
 	free(bench_stack);
-	free(strategy);
 	return (0);
 }

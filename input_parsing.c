@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 14:18:10 by ktaher            #+#    #+#             */
-/*   Updated: 2026/06/01 23:22:58 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/06 09:00:20 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ char	*strategy_parser(char **argv, t_bench *bench, int argc)
 	while (i < argc)
 	{
 		if (ft_strncmp(argv[i], "--simple", 8) == 0)
-			strat = ft_strtrim(argv[i], "-");
+			strat = argv[i] + 2;
 		else if (ft_strncmp(argv[i], "--medium", 8) == 0)
-			strat = ft_strtrim(argv[i], "-");
+			strat = argv[i] + 2;
 		else if (ft_strncmp(argv[i], "--complex", 9) == 0)
-			strat = ft_strtrim(argv[i], "-");
+			strat = argv[i] + 2;
 		else if (ft_strncmp(argv[i], "--adaptive", 10) == 0)
-			strat = ft_strtrim(argv[i], "-");
+			strat = argv[i] + 2;
 		else if (ft_strncmp(argv[i], "--bench", 7) == 0)
 			bench->bench_active = 1;
 		else if (ft_strncmp(argv[i], "--", 2) == 0)
