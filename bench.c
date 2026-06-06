@@ -6,7 +6,7 @@
 /*   By: ktaher <ktaher@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 14:33:45 by ktaher            #+#    #+#             */
-/*   Updated: 2026/06/02 23:29:00 by ktaher           ###   ########.fr       */
+/*   Updated: 2026/06/06 09:04:55 by ktaher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ void	print_strat(char *strat, t_bench *bench)
 		ft_putstr_fd(" / O(nlog(n))\n", 2);
 	else if (ft_strncmp(strat, "adaptive", 8) == 0)
 	{
-		if (ft_strncmp(bench->strat, "simple", 6) == 0)
-			ft_putstr_fd(" / O(n\u00B2)", 2);
-		else if (ft_strncmp(bench->strat, "medium", 6) == 0)
-			ft_putstr_fd(" / O(n\u221An)", 2);
-		else if (ft_strncmp(bench->strat, "complex", 7) == 0)
-			ft_putstr_fd(" / O(nlog(n))", 2);
-		ft_putstr_fd("\n", 2);
+		if (bench->disorder < 0.2)
+			ft_putstr_fd(" / O(n²)\n", 2);
+		else if (bench->disorder < 0.5)
+			ft_putstr_fd(" / O(n√n)\n", 2);
+		else
+			ft_putstr_fd(" / O(nlog(n))\n", 2);
 	}
 }
 
